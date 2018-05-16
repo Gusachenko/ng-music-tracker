@@ -1,0 +1,15 @@
+@import '../../global-variables.scss';
+
+:host {
+  display: flex;
+  background: lightblue;
+  .song-item__name {
+    width: $first-vertical-column_width;
+  }
+  .song-item__track {
+    flex-grow: 1;
+    margin-left: $timeline-padding-around;
+    margin-right: $timeline-padding-around;
+    background: green;
+  }
+}
