@@ -1,7 +1,8 @@
 <div class="content">
   <div class="songs-list">
-    <ng-container *ngFor="let t of timeLineNumbers; index as i;">
-      <app-song-item></app-song-item>
+    <ng-container *ngFor="let song of songsList; index as i;">
+      <app-song-item [id]="song.id" [name]="song.name" (onremove)="removeTrack($event)"></app-song-item>
+      <!-- <input (click)="removeTrack(song.id)" class="remove-btn" type="button" value="-" title="Remove track"> -->
     </ng-container>
   </div>
 </div>

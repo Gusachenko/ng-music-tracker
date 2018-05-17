@@ -1,3 +1,8 @@
-<div class="song-item__name">track-name</div>
+<input (click)="removeTrack()" class="remove-btn" type="button" value="X" title="Remove track">
+<div class="song-item__name">{{name}}</div>
 
-<div class="song-item__track"> track </div>
+<div class="song-item__track">
+
+  <svg [attr.id]="'track' + id"></svg>
+
+</div>

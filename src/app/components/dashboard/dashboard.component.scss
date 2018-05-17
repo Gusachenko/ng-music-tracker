@@ -12,10 +12,10 @@
   .first-vertical-column {
     position: absolute;
     top: 0;
-    left: 0;
+    left: $first-vertical-column_width;
     height: 100%;
     box-sizing: border-box;
-    width: $first-vertical-column_width;
+    width: 2px;
     padding-top: $first-horizontal-row_height;
     border-right: 2px solid black;
     background: transparent;
@@ -50,7 +50,6 @@
     width: 100%;
     height: 100%;
     padding-top: $first-horizontal-row_height;
-    background: gold;
 
     .songs-list {
       position: relative;

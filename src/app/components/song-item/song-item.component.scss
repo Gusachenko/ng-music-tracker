@@ -2,14 +2,39 @@
 
 :host {
   display: flex;
-  background: lightblue;
+  height: 50px;
+  align-items: center;
+  transform: scale(0.8);
+  opacity: 0;
+  animation: on-show-component 0.2s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
   .song-item__name {
     width: $first-vertical-column_width;
+    text-align: center;
   }
   .song-item__track {
+    height: 100%;
     flex-grow: 1;
     margin-left: $timeline-padding-around;
-    margin-right: $timeline-padding-around;
-    background: green;
+  }
+  .remove-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(0.5);
+    background: transparent;
+    border: 1px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover{
+      background: orangered;
+    }
+  }
+}
+
+@keyframes on-show-component {
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }

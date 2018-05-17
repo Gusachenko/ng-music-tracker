@@ -1,5 +1,6 @@
 <div class="action-buttons">
-    <input type="button" value="Добавить трек">
+    <input type="file" #fileInput style="display:none" (change)="addNewSong()">
+    <input (click)="fileInput.click()" type="button" value="Добавить трек">
 </div>
 
 <app-dashboard></app-dashboard>
