@@ -2,7 +2,7 @@
 Simple music tracker view: Angular &amp; RxJS &amp; D3.js
 
 
-![Music tracker](https://github.com/Gusachenko/ng-music-tracker/blob/master/github-assets/screen.png?raw=true "Music tracker")
+![Music tracker](https://github.com/Gusachenko/ng-music-tracker/blob/master/github_assets/screen.png?raw=true "Music tracker")
 
 ## Getting started
 ```bash
