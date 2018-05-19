@@ -11,8 +11,10 @@ import * as d3 from 'd3';
 })
 export class SongItemComponent implements AfterViewInit, Song {
   @Output('onremove') onremove = new EventEmitter<number>();
+
   @Input('id') id: number;
   @Input('name') name: string;
+
   d3SvgContainer: any;
   d3SvgSongGroup: any;
   firstClickPositionX: number;
@@ -40,9 +42,10 @@ export class SongItemComponent implements AfterViewInit, Song {
           .on('drag', () => {
             let diffDistanceX = d3.event.x - this.firstClickPositionX;
 
-            this.d3SvgContainer
-              .select('.song-item-group')
-              .attr('transform', `translate(${diffDistanceX})`);
+            this.d3SvgContainerSelectors.SONG_ITEM_GROUP.attr(
+              'transform',
+              `translate(${diffDistanceX})`
+            );
           })
           .on('end', () => {
             let diffDistanceX = d3.event.x - this.firstClickPositionX;
@@ -90,14 +93,15 @@ export class SongItemComponent implements AfterViewInit, Song {
           })
           .on('drag', () => {
             let diffDistanceX = d3.event.x - this.firstClickPositionX;
-            this.d3SvgContainer
-              .select('rect')
-              .attr('width', `${this.originWidth - diffDistanceX}`)
-              .attr('transform', `translate(${diffDistanceX})`);
+            this.d3SvgContainerSelectors.RECT.attr(
+              'width',
+              `${this.originWidth - diffDistanceX}`
+            ).attr('transform', `translate(${diffDistanceX})`);
 
-            this.d3SvgContainer
-              .select('.control-left')
-              .attr('transform', `translate(${diffDistanceX})`);
+            this.d3SvgContainerSelectors.CONTROL_LEFT.attr(
+              'transform',
+              `translate(${diffDistanceX})`
+            );
           })
           .on('end', () => {
             let diffDistanceX = d3.event.x - this.firstClickPositionX;
@@ -127,11 +131,12 @@ export class SongItemComponent implements AfterViewInit, Song {
           })
           .on('drag', () => {
             let diffDistanceX = d3.event.x - this.firstClickPositionX;
-            this.d3SvgContainer.select('rect').attr('width', `${this.originWidth + diffDistanceX}`);
+            this.d3SvgContainerSelectors.RECT.attr('width', `${this.originWidth + diffDistanceX}`);
 
-            this.d3SvgContainer
-              .select('.control-right')
-              .attr('transform', `translate(${diffDistanceX})`);
+            this.d3SvgContainerSelectors.CONTROL_RIGHT.attr(
+              'transform',
+              `translate(${diffDistanceX})`
+            );
           })
           .on('end', () => {
             let diffDistanceX = d3.event.x - this.firstClickPositionX;
@@ -144,19 +149,29 @@ export class SongItemComponent implements AfterViewInit, Song {
 
   private updateSvgElementsPosition(): void {
     //reset previous transformations
-    this.d3SvgContainer.select('.song-item-group').attr('transform', `translate(0)`);
-    this.d3SvgContainer.select('rect').attr('transform', `translate(0)`);
-    this.d3SvgContainer.select('.control-right').attr('transform', `translate(0)`);
-    this.d3SvgContainer.select('.control-left').attr('transform', `translate(0)`);
+    this.d3SvgContainerSelectors.SONG_ITEM_GROUP.attr('transform', `translate(0)`);
+    this.d3SvgContainerSelectors.RECT.attr('transform', `translate(0)`);
+    this.d3SvgContainerSelectors.CONTROL_LEFT.attr('transform', `translate(0)`);
+    this.d3SvgContainerSelectors.CONTROL_RIGHT.attr('transform', `translate(0)`);
 
-    this.d3SvgContainer.select('rect').attr('x', `${this.originPositionX}`);
-    this.d3SvgContainer.select('.control-left').attr('x', `${this.originPositionX}`);
-    this.d3SvgContainer
-      .select('.control-right')
-      .attr('x', `${this.originPositionX + this.originWidth - 10}`);
+    this.d3SvgContainerSelectors.RECT.attr('x', `${this.originPositionX}`);
+    this.d3SvgContainerSelectors.CONTROL_LEFT.attr('x', `${this.originPositionX}`);
+    this.d3SvgContainerSelectors.CONTROL_RIGHT.attr(
+      'x',
+      `${this.originPositionX + this.originWidth - 10}`
+    );
   }
 
-  removeTrack() {
+  get d3SvgContainerSelectors(): any {
+    return {
+      SONG_ITEM_GROUP: this.d3SvgContainer.select('.song-item-group'),
+      RECT: this.d3SvgContainer.select('rect'),
+      CONTROL_LEFT: this.d3SvgContainer.select('.control-left'),
+      CONTROL_RIGHT: this.d3SvgContainer.select('.control-right')
+    };
+  }
+
+  removeTrack(): void {
     this.onremove.emit(this.id);
   }
 
