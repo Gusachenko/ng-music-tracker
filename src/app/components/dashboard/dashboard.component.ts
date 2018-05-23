@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 
-import { GlobalStateService } from '../../services/global-state.service';
+import { SongsStateService } from '../../services/songs-state.service';
 import { Song } from '../../interfaces/common';
 
 @Component({
@@ -11,15 +11,15 @@ import { Song } from '../../interfaces/common';
 export class DashboardComponent implements AfterViewInit {
   timeLineNumbers = new Array(24);
   songsList: Array<Song>;
-  constructor(private globalStateService: GlobalStateService) {
-    this.globalStateService.songsListSourceState.subscribe(songsList => {
-      this.songsList = songsList;
-    });
-  }
 
   removeTrack(songId: number) {
-    this.songsList.splice(this.songsList.findIndex( el => el.id === songId), 1);
-    this.globalStateService.changeSongsListSourceState(this.songsList);
+    this.songsStateService.removeSongById(songId);
+  }
+
+  constructor(private songsStateService: SongsStateService) {
+    this.songsStateService.songsListSourceState.subscribe(songsList => {
+      this.songsList = songsList;
+    });
   }
 
   ngAfterViewInit() {}
